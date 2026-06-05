@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import './App.css'
 import BalanceBox from './components/BalanceBox'
 import TransactionForm from './components/TransactionForm'
 import TransactionList from './components/TransactionList'
@@ -23,9 +24,9 @@ function App() {
   }
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'sans-serif', maxWidth: '600px', margin: '0 auto' }}>
-      <h1>Personal Finance Dashboard</h1>
-      <hr style={{ marginBottom: '20px' }} />
+    <div className="container">
+      <h1 className="main-title">Personal Finance Dashboard</h1>
+      <hr className="neo-divider" />
 
       <BalanceBox transactions={transactions} />
       <TransactionForm onAddTransaction={addTransaction} />
