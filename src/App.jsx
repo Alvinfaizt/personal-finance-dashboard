@@ -15,6 +15,13 @@ function App() {
     setTransactions([newTx, ...transactions])
   }
 
+  // FUNGSI BARU: Untuk menghapus transaksi berdasarkan ID
+const deleteTransaction = (id) => {
+  // Kita filter array: sisakan semua transaksi yang ID-nya TIDAK SAMA dengan ID yang dihapus
+  const updatedTransactions = transactions.filter(item => item.id !== id)
+  setTransactions(updatedTransactions)
+}
+
   return (
     <div style={{ padding: '20px', fontFamily: 'sans-serif', maxWidth: '600px', margin: '0 auto' }}>
       <h1>Personal Finance Dashboard</h1>
