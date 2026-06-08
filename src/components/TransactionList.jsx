@@ -1,37 +1,27 @@
-// 1. Tangkap onDeleteTransaction dari props
 function TransactionList({ transactions, onDeleteTransaction }) {
   return (
-    <div style={{ border: '1px solid #ccc', padding: '15px', borderRadius: '8px' }}>
-      <h3 style={{ margin: '0 0 15px 0' }}>Transaction History</h3>
+    <div className="neo-box">
+      <h3 style={{ margin: '0 0 15px 0', fontWeight: 900, textTransform: 'uppercase' }}>Transaction History</h3>
       
       <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
-        {transactions.length === 0 && <p style={{ color: '#777' }}>No transactions found.</p>}
+        {transactions.length === 0 && <p style={{ color: '#777', fontWeight: 700 }}>No transactions found.</p>}
 
         {transactions.map((item) => (
-          <li 
-            key={item.id} 
-            style={{ 
-              display: 'flex', 
-              justifyContent: 'space-between', 
-              padding: '10px', 
-              borderBottom: '1px solid #eee', 
-              backgroundColor: '#fdfdfd', 
-              marginBottom: '5px' 
-            }}
-          >
-            <span style={{ flexGrow: 1 }}>{item.description}</span>
+          <li key={item.id} className="neo-list-item">
+            <span style={{ flexGrow: 1, fontWeight: 700 }}>{item.description}</span>
             <span style={{ 
-              color: item.type === 'income' ? '#2ecc71' : '#e74c3c', 
-              fontWeight: 'bold', 
-              marginRight: '15px' 
+              backgroundColor: item.type === 'income' ? '#a3e635' : '#f87171', 
+              border: '2px solid #1a1a1a',
+              padding: '4px 8px',
+              fontWeight: 800, 
+              marginRight: '15px',
+              fontSize: '14px'
             }}>
               {item.type === 'income' ? '+' : '-'}${item.amount.toFixed(2)}
             </span>
-            
-            {/* 2. Pasang fungsi onClick untuk mengeksekusi penghapusan */}
             <button 
               onClick={() => onDeleteTransaction(item.id)}
-              style={{ color: 'red', border: 'none', background: 'none', cursor: 'pointer', fontWeight: 'bold' }}
+              className="neo-btn-delete"
             >
               X
             </button>
