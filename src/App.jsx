@@ -1,12 +1,11 @@
-import { useState, useEffect } from 'react' // 1. Tambahkan useEffect
+import { useState, useEffect } from 'react'
 import './App.css'
 import BalanceBox from './components/BalanceBox'
 import TransactionForm from './components/TransactionForm'
 import TransactionList from './components/TransactionList'
+import FinancialChart from './components/FinancialChart' // Import grafiknya
 
 function App() {
-  // 2. Ubah state awal agar membaca dari localStorage terlebih dahulu.
-  // Jika tidak ada data di localStorage, baru pakai data bawaan (array kosong atau dummy).
   const [transactions, setTransactions] = useState(() => {
     const savedTransactions = localStorage.getItem('neo_transactions')
     return savedTransactions ? JSON.parse(savedTransactions) : [
@@ -15,7 +14,6 @@ function App() {
     ]
   })
 
-  // 3. Gunakan useEffect untuk otomatis menyimpan data setiap kali array 'transactions' berubah
   useEffect(() => {
     localStorage.setItem('neo_transactions', JSON.stringify(transactions))
   }, [transactions])
@@ -34,6 +32,10 @@ function App() {
       
       <BalanceBox transactions={transactions} /> 
       <TransactionForm onAddTransaction={addTransaction} />
+      
+      {/* Pasang Komponen Grafik di Sini */}
+      <FinancialChart transactions={transactions} />
+      
       <TransactionList transactions={transactions} onDeleteTransaction={deleteTransaction} />
     </div>
   )
