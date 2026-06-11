@@ -128,3 +128,25 @@
   transform: translate(-2px, -2px);
   box-shadow: 10px 10px 0px #1a1a1a;
 }
+
+/* Kotak Alert Peringatan */
+.neo-alert-danger {
+  background-color: #ff5c5c;
+  color: #1a1a1a;
+  border: 4px solid #1a1a1a;
+  padding: 15px;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  box-shadow: 6px 6px 0px #1a1a1a;
+}
+
+/* Variasi Kotak Saldo ketika Minus/Defisit */
+.neo-box-danger {
+  background-color: #f87171 !important;
+  /* Merah terang */
+  border: 4px solid #1a1a1a;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: 8px 8px 0px #1a1a1a;
+}
