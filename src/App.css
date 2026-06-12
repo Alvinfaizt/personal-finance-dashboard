@@ -213,3 +213,34 @@
   box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2);
   text-align: center;
 }
+
+/* --- RESPONSIVE MOBILE SETTINGS --- */
+
+@media (max-width: 600px) {
+  .container {
+    padding: 20px 12px;
+    /* Mengurangi padding luar agar space layar HP maksimal */
+  }
+
+  .main-title {
+    font-size: 2rem;
+    /* Memperkecil ukuran judul di HP */
+    margin-bottom: 20px;
+  }
+
+  .neo-box,
+  .neo-box-danger {
+    padding: 16px;
+    /* Memperkecil padding dalam kotak di HP */
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 400px) {
+
+  /* Mengubah susunan input jumlah dan tipe agar vertikal di layar sangat kecil */
+  .form-row-mobile {
+    flex-direction: column !important;
+    gap: 0px !important;
+  }
+}
