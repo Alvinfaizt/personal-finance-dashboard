@@ -34,6 +34,20 @@ function TransactionForm({ onAddTransaction, currency }) {
             <label style={{ fontWeight: 800 }}>Amount ({currency === 'IDR' ? 'Rp' : '$'})</label>
             <input type="number" className="neo-input" placeholder="0" value={amount} onChange={(e) => setAmount(e.target.value)} />
           </div>
+          {/* Cari bagian ini di TransactionForm.jsx dan tambahkan className="form-row-mobile" */}
+          <div className="form-row-mobile" style={{ display: 'flex', gap: '15px', marginBottom: '15px' }}>
+            <div style={{ flex: 1 }}>
+              <label style={{ fontWeight: 800 }}>Amount ({currency === 'IDR' ? 'Rp' : '$'})</label>
+              <input type="number" className="neo-input" placeholder="0" value={amount} onChange={(e) => setAmount(e.target.value)} />
+            </div>
+            <div style={{ flex: 1 }}>
+              <label style={{ fontWeight: 800 }}>Type</label>
+              <select className="neo-select" value={type} onChange={(e) => setType(e.target.value)}>
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+              </select>
+            </div>
+          </div>
           <div style={{ flex: 1 }}>
             <label style={{ fontWeight: 800 }}>Type</label>
             <select className="neo-select" value={type} onChange={(e) => setType(e.target.value)}>
