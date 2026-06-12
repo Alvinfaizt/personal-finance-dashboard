@@ -170,3 +170,22 @@
   margin-bottom: 25px;
   box-shadow: 6px 6px 0px #1a1a1a;
 }
+
+/* Tombol Ekspor Premium */
+.btn-export {
+  padding: 8px 14px;
+  background-color: #face15;
+  /* Kuning terang */
+  color: #1a1a1a;
+  border: 3px solid #1a1a1a;
+  font-weight: 900;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 3px 3px 0px #1a1a1a;
+}
+
+.btn-export:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0px 0px 0px #1a1a1a;
+}
