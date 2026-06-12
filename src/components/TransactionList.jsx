@@ -74,15 +74,22 @@ function TransactionList({ transactions, onDeleteTransaction, formatMoney }) {
         )}
 
         {filteredTransactions.map((item) => (
-          <li key={item.id} className="neo-list-item">
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <span style={{ fontWeight: 700 }}>{item.description}</span>
-              <span className="neo-badge" style={{ marginTop: '5px' }}>{item.category || '🛒 General'}</span>
+          <li key={item.id} className="neo-list-item" style={{ gap: '10px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', minWidth: '0', flex: 1 }}>
+              {/* Menggunakan textOverflow agar deskripsi panjang di HP otomatis menjadi titik-titik (...) */}
+              <span style={{ fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                {item.description}
+              </span>
+              <div style={{ marginTop: '3px' }}>
+                <span className="neo-badge">{item.category}</span>
+              </div>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
               <span style={{
-                backgroundColor: item.type === 'income' ? '#a3e635' : '#f87171',
-                border: '2px solid #1a1a1a', padding: '6px 10px', fontWeight: 800, marginRight: '15px'
+                backgroundColor: item.type === 'income' ? 'rgba(34, 197, 94, 0.15)' : 'rgba(239, 68, 68, 0.15)',
+                color: item.type === 'income' ? '#16a34a' : '#dc2626',
+                padding: '6px 10px', fontWeight: 800, borderRadius: '8px', fontSize: '0.85rem'
               }}>
                 {item.type === 'income' ? '+' : '-'}{formatMoney(item.amount)}
               </span>
