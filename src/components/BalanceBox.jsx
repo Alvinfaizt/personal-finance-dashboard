@@ -29,4 +29,5 @@ function BalanceBox({ transactions, formatMoney }) {
     </div>
   )
 }
+
 export default BalanceBox

@@ -6,7 +6,8 @@ import TransactionList from './components/TransactionList'
 import FinancialChart from './components/FinancialChart'
 
 function App() {
-  const [currency, setCurrency] = useState('USD') // State mata uang: USD atau IDR
+  const [currency, setCurrency] = useState('USD')
+  const [errorMessage, setErrorMessage] = useState('')
 
   const [transactions, setTransactions] = useState(() => {
     const savedTransactions = localStorage.getItem('neo_transactions')
@@ -16,13 +17,10 @@ function App() {
     ]
   })
 
-  const [errorMessage, setErrorMessage] = useState('')
-
   useEffect(() => {
     localStorage.setItem('neo_transactions', JSON.stringify(transactions))
   }, [transactions])
 
-  // Fungsi helper global untuk memformat angka sesuai mata uang pilihan
   const formatMoney = (val) => {
     if (currency === 'IDR') {
       return 'Rp' + (val * 16000).toLocaleString('id-ID')
@@ -35,21 +33,23 @@ function App() {
   const currentBalance = currentIncome - currentExpense
 
   const addTransaction = (newTx) => {
-    // Jika user menginput saat mode IDR, kita konversi nominalnya kembali ke USD sebelum masuk database lokal
     let amountInUSD = newTx.amount
+
+    // Jika sedang dalam mode IDR, konversi dulu input angka user ke bentuk USD dasar database
     if (currency === 'IDR') {
       amountInUSD = newTx.amount / 16000
     }
 
-    const adjustedTx = { ...newTx, amount: amountInUSD }
+    const finalTx = { ...newTx, amount: amountInUSD }
 
-    if (adjustedTx.type === 'expense' && adjustedTx.amount > currentBalance) {
+    // Proteksi saldo minus
+    if (finalTx.type === 'expense' && finalTx.amount > currentBalance) {
       setErrorMessage(`❌ TRANSACTION DENIED: INSUFFICIENT FUNDS!`)
       setTimeout(() => setErrorMessage(''), 4000)
       return
     }
 
-    setTransactions([adjustedTx, ...transactions])
+    setTransactions([finalTx, ...transactions])
     setErrorMessage('')
   }
 
@@ -59,9 +59,8 @@ function App() {
 
   return (
     <div className="container">
-      <h1 className="main-title">💲 NEO DASHBOARD 💲</h1>
+      <h1 className="main-title">Personal Finance</h1>
 
-      {/* TOMBOL TOGGLE PERGANTIAN MATA UANG */}
       <div className="currency-bar">
         <button className={`btn-currency ${currency === 'USD' ? 'active' : ''}`} onClick={() => setCurrency('USD')}>USD ($)</button>
         <button className={`btn-currency ${currency === 'IDR' ? 'active' : ''}`} onClick={() => setCurrency('IDR')}>IDR (Rp)</button>
@@ -69,7 +68,6 @@ function App() {
 
       {errorMessage && <div className="neo-alert-danger">{errorMessage}</div>}
 
-      {/* Oper fungsi formatMoney ke anak komponen */}
       <BalanceBox transactions={transactions} formatMoney={formatMoney} />
       <TransactionForm onAddTransaction={addTransaction} currency={currency} />
       <FinancialChart transactions={transactions} currency={currency} />
