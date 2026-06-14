@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
-import BalanceBox from './components/BalanceBox'
-import TransactionForm from './components/TransactionForm'
-import TransactionList from './components/TransactionList'
-import FinancialChart from './components/FinancialChart'
+import Home from './components/Home'
+import Dashboard from './components/Dashboard'
 
 function App() {
   const [currency, setCurrency] = useState('USD')
@@ -34,15 +33,12 @@ function App() {
 
   const addTransaction = (newTx) => {
     let amountInUSD = newTx.amount
-
-    // Jika sedang dalam mode IDR, konversi dulu input angka user ke bentuk USD dasar database
     if (currency === 'IDR') {
       amountInUSD = newTx.amount / 16000
     }
 
     const finalTx = { ...newTx, amount: amountInUSD }
 
-    // Proteksi saldo minus
     if (finalTx.type === 'expense' && finalTx.amount > currentBalance) {
       setErrorMessage(`❌ TRANSACTION DENIED: INSUFFICIENT FUNDS!`)
       setTimeout(() => setErrorMessage(''), 4000)
@@ -58,21 +54,32 @@ function App() {
   }
 
   return (
-    <div className="container">
-      <h1 className="main-title">Personal Finance</h1>
+    <Router>
+      <div className="container">
+        <h1 className="main-title">NeoFinance App</h1>
 
-      <div className="currency-bar">
-        <button className={`btn-currency ${currency === 'USD' ? 'active' : ''}`} onClick={() => setCurrency('USD')}>USD ($)</button>
-        <button className={`btn-currency ${currency === 'IDR' ? 'active' : ''}`} onClick={() => setCurrency('IDR')}>IDR (Rp)</button>
+        <Routes>
+          {/* Rute Jalan ke Halaman Beranda Utama */}
+          <Route path="/" element={<Home />} />
+
+          {/* Rute Jalan ke Halaman Dashboard Kelola Finansial */}
+          <Route
+            path="/dashboard"
+            element={
+              <Dashboard
+                currency={currency}
+                setCurrency={setCurrency}
+                errorMessage={errorMessage}
+                transactions={transactions}
+                formatMoney={formatMoney}
+                addTransaction={addTransaction}
+                deleteTransaction={deleteTransaction}
+              />
+            }
+          />
+        </Routes>
       </div>
-
-      {errorMessage && <div className="neo-alert-danger">{errorMessage}</div>}
-
-      <BalanceBox transactions={transactions} formatMoney={formatMoney} />
-      <TransactionForm onAddTransaction={addTransaction} currency={currency} />
-      <FinancialChart transactions={transactions} currency={currency} />
-      <TransactionList transactions={transactions} onDeleteTransaction={deleteTransaction} formatMoney={formatMoney} />
-    </div>
+    </Router>
   )
 }
 
