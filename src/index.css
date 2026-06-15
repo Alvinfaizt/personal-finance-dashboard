@@ -1,39 +1,25 @@
 :root {
   font-family: 'Public Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #e2e8f0;
-  /* Warna teks abu-abu terang agar tidak menusuk mata */
+  color: #1e293b; /* Teks abu-abu gelap yang elegan, bukan hitam pekat */
 }
 
 body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background-color: #090d16;
-  /* Hitam pekat Cyberpunk */
-  /* Efek aura grid samar di latar belakang */
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 40px 40px;
-  background-attachment: fixed;
+  background-color: #f8fafc; /* Warna putih abu-abu pualam yang sangat teduh */
   display: flex;
   justify-content: center;
 }
 
-/* Kustomisasi Scrollbar Mode Gelap */
+/* Kustomisasi Scrollbar Minimalis */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
-
 ::-webkit-scrollbar-track {
-  background: #090d16;
+  background: #f8fafc;
 }
-
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #cbd5e1;
   border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #334155;
 }
