@@ -1,13 +1,19 @@
+/* Mengambil font Inter (bobot 400, 500, 600, 700, 800) dari Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
 :root {
-  font-family: 'Public Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #1e293b; /* Teks abu-abu gelap yang elegan, bukan hitam pekat */
+  /* Menerapkan Inter sebagai font utama */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: #1e293b;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background-color: #f8fafc; /* Warna putih abu-abu pualam yang sangat teduh */
+  background-color: #f8fafc; /* Putih pualam yang teduh */
   display: flex;
   justify-content: center;
 }
