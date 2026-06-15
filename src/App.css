@@ -6,30 +6,28 @@
   box-sizing: border-box;
 }
 
-/* Judul Utama yang Tajam dan Formal */
+/* Judul Utama dengan Font Baru yang Lebih Rapat dan Tegas */
 .main-title {
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 800;
   text-align: center;
-  letter-spacing: -0.8px;
+  letter-spacing: -0.04em; /* Membuat font modern terlihat lebih compact/padat */
   margin-bottom: 35px;
-  color: #0f172a; /* Hitam pekat solid */
+  color: #0f172a;
 }
 
-/* Kotak Komponen ala Aplikasi Premium (Linear / Notion Style) */
+/* Kotak Komponen Minimalis Premium */
 .neo-box {
   background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.03); /* Border super samar */
+  border: 1px solid rgba(0, 0, 0, 0.03);
   padding: 28px;
   border-radius: 16px;
   margin-bottom: 20px;
-  /* Bayangan ultra halus */
   box-shadow: 
-    0 1px 3px rgba(0,0,0,0.02),
-    0 10px 30px -5px rgba(0,0,0,0.03);
+    0 1px 3px rgba(0,0,0,0.01),
+    0 10px 30px -5px rgba(0,0,0,0.02);
 }
 
-/* Kotak Peringatan Saldo Kritis */
 .neo-box-danger {
   background: #fef2f2;
   border: 1px solid #fee2e2;
@@ -54,6 +52,7 @@
 .btn-currency {
   flex: 1;
   padding: 6px 12px;
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: 0.8rem;
   border: none;
@@ -76,11 +75,12 @@
 /* Input Form Minimalis Elegan */
 .neo-input, .neo-select {
   width: 100%;
-  padding: 10px 14px;
+  padding: 11px 14px;
   box-sizing: border-box;
   border: 1px solid #e2e8f0;
   background-color: #fff;
   border-radius: 8px;
+  font-family: 'Inter', sans-serif;
   font-weight: 500;
   font-size: 0.9rem;
   color: #0f172a;
@@ -89,17 +89,18 @@
 }
 .neo-input:focus, .neo-select:focus {
   outline: none;
-  border-color: #0f172a; /* Fokus hitam solid, sangat clean */
+  border-color: #0f172a;
 }
 
 /* Tombol Aksi Solid Hitam Tech */
 .neo-btn {
   width: 100%;
-  padding: 12px;
-  background: #0f172a; /* Tombol Hitam Solid */
+  padding: 13px;
+  background: #0f172a;
   color: #ffffff;
   border: none;
   border-radius: 8px;
+  font-family: 'Inter', sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
@@ -115,7 +116,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 0; /* Menggunakan border bawah saja agar rapi */
+  padding: 14px 0;
   border-bottom: 1px solid #f1f5f9;
   background: transparent;
 }
@@ -156,6 +157,7 @@
   background: #ffffff;
   border: 1px solid #e2e8f0;
   color: #475569;
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: 0.75rem;
   border-radius: 6px;
