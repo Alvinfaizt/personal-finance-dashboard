@@ -1,222 +1,190 @@
 .container {
-  padding: 40px 20px;
-  max-width: 650px;
+  padding: 50px 20px;
+  max-width: 620px;
   margin: 0 auto;
   width: 100%;
   box-sizing: border-box;
 }
 
-/* Judul Utama Glow Neon */
+/* Judul Utama yang Tajam dan Formal */
 .main-title {
-  font-size: 2.3rem;
+  font-size: 2rem;
   font-weight: 800;
   text-align: center;
-  letter-spacing: -0.5px;
-  margin-bottom: 30px;
-  color: #00f2fe;
-  /* Warna Cyan Tekno */
-  text-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+  letter-spacing: -0.8px;
+  margin-bottom: 35px;
+  color: #0f172a; /* Hitam pekat solid */
 }
 
-/* Kotak Komponen ala Dasbor Server */
+/* Kotak Komponen ala Aplikasi Premium (Linear / Notion Style) */
 .neo-box {
-  background: #111827;
-  /* Abu-abu gelap kontras */
-  border: 1px solid #1f2937;
-  padding: 25px;
-  border-radius: 14px;
-  margin-bottom: 25px;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-  transition: border-color 0.2s ease;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.03); /* Border super samar */
+  padding: 28px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  /* Bayangan ultra halus */
+  box-shadow: 
+    0 1px 3px rgba(0,0,0,0.02),
+    0 10px 30px -5px rgba(0,0,0,0.03);
 }
 
-.neo-box:hover {
-  border-color: #374151;
-}
-
-/* Kotak Bahaya ketika Saldo Kritis */
+/* Kotak Peringatan Saldo Kritis */
 .neo-box-danger {
-  background: #1e1b1b;
-  border: 1px solid #991b1b;
-  /* Border Merah */
-  padding: 25px;
-  border-radius: 14px;
-  margin-bottom: 25px;
-  box-shadow: 0 10px 25px -5px rgba(239, 68, 68, 0.05);
+  background: #fef2f2;
+  border: 1px solid #fee2e2;
+  padding: 28px;
+  border-radius: 16px;
+  margin-bottom: 20px;
 }
 
-/* Tombol Switch Mata Uang */
+/* Bar Navigasi Mata Uang Minimalis */
 .currency-bar {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-bottom: 25px;
-}
-
-.btn-currency {
-  padding: 8px 16px;
-  font-weight: 600;
-  font-size: 0.85rem;
-  border: 1px solid #1f2937;
-  background: #111827;
-  border-radius: 8px;
-  cursor: pointer;
-  color: #94a3b8;
-  transition: all 0.2s ease;
-}
-
-.btn-currency:hover {
-  border-color: #4b5563;
-  color: #f8fafc;
-}
-
-.btn-currency.active {
-  background: #00f2fe;
-  color: #090d16;
-  border-color: #00f2fe;
-  font-weight: 700;
-  box-shadow: 0 0 12px rgba(0, 242, 254, 0.3);
-}
-
-/* Input & Pilihan Dropdown Form */
-.neo-input,
-.neo-select {
-  width: 100%;
-  padding: 12px 16px;
-  box-sizing: border-box;
-  border: 1px solid #1f2937;
+  gap: 6px;
+  margin-bottom: 30px;
+  background: #f1f5f9;
+  padding: 4px;
   border-radius: 10px;
+  max-width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.btn-currency {
+  flex: 1;
+  padding: 6px 12px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  border: none;
+  background: transparent;
+  border-radius: 7px;
+  cursor: pointer;
+  color: #64748b;
+  transition: all 0.15s ease;
+}
+.btn-currency:hover {
+  color: #0f172a;
+}
+.btn-currency.active {
+  background: #ffffff;
+  color: #0f172a;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+/* Input Form Minimalis Elegan */
+.neo-input, .neo-select {
+  width: 100%;
+  padding: 10px 14px;
+  box-sizing: border-box;
+  border: 1px solid #e2e8f0;
+  background-color: #fff;
+  border-radius: 8px;
   font-weight: 500;
-  font-size: 0.95rem;
-  background: #0b0f19;
-  color: #f8fafc;
+  font-size: 0.9rem;
+  color: #0f172a;
   margin-top: 6px;
   transition: all 0.2s ease;
 }
-
-.neo-input:focus,
-.neo-select:focus {
+.neo-input:focus, .neo-select:focus {
   outline: none;
-  border-color: #00f2fe;
-  box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.15);
+  border-color: #0f172a; /* Fokus hitam solid, sangat clean */
 }
 
-/* Tombol Kirim Utama (Solid Cyan Tech) */
+/* Tombol Aksi Solid Hitam Tech */
 .neo-btn {
   width: 100%;
-  padding: 14px;
-  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
-  color: #090d16;
+  padding: 12px;
+  background: #0f172a; /* Tombol Hitam Solid */
+  color: #ffffff;
   border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-weight: 700;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
   margin-top: 15px;
-  box-shadow: 0 4px 14px rgba(0, 242, 254, 0.2);
-  transition: all 0.2s ease;
+  transition: background 0.2s ease;
 }
-
 .neo-btn:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(0, 242, 254, 0.35);
+  background: #1e293b;
 }
 
-/* Baris Riwayat Transaksi */
+/* Baris Riwayat Transaksi yang Bersih */
 .neo-list-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 16px;
-  border: 1px solid #1f2937;
-  background: #0b0f19;
-  margin-bottom: 10px;
-  border-radius: 10px;
+  padding: 12px 0; /* Menggunakan border bawah saja agar rapi */
+  border-bottom: 1px solid #f1f5f9;
+  background: transparent;
 }
 
 /* Badge Kategori */
 .neo-badge {
   font-size: 0.75rem;
   font-weight: 600;
-  padding: 2px 8px;
-  border-radius: 6px;
-  background: #111827;
-  color: #94a3b8;
-  border: 1px solid #1f2937;
-  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #f1f5f9;
+  color: #475569;
 }
 
-/* Tombol Hapus Silang */
+/* Tombol Hapus Bulat Halus */
 .neo-btn-delete {
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.2);
-  color: #f87171;
-  font-weight: 700;
-  border-radius: 6px;
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 1.1rem;
+  cursor: pointer;
   width: 28px;
   height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+  border-radius: 50%;
   transition: all 0.2s ease;
 }
-
 .neo-btn-delete:hover {
-  background: #ef4444;
-  color: white;
+  background: #fef2f2;
+  color: #ef4444;
 }
 
-/* Tombol Ekspor Data */
+/* Tombol Ekspor */
 .btn-export {
   padding: 6px 12px;
-  background: #1f2937;
-  border: 1px solid #374151;
-  color: #cbd5e1;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #475569;
   font-weight: 600;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
-
 .btn-export:hover {
-  background: #374151;
-  color: #fff;
+  background: #f8fafc;
+  border-color: #cbd5e1;
 }
 
-/* Kotak Pesan Peringatan */
+/* Kotak Gagal Saldo */
 .neo-alert-danger {
-  background: #7f1d1d;
-  border: 1px solid #f87171;
-  color: #fca5a5;
-  border-radius: 10px;
-  padding: 12px 16px;
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  color: #991b1b;
+  border-radius: 8px;
+  padding: 12px;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   margin-bottom: 20px;
   text-align: center;
 }
 
 @media (max-width: 600px) {
-  .container {
-    padding: 20px 12px;
-  }
-
-  .main-title {
-    font-size: 1.8rem;
-  }
-
-  .neo-box,
-  .neo-box-danger {
-    padding: 16px;
-  }
+  .container { padding: 25px 16px; }
+  .neo-box, .neo-box-danger { padding: 20px; }
 }
 
 @media (max-width: 450px) {
-  .form-row-mobile {
-    flex-direction: column !important;
-    gap: 0px !important;
-  }
+  .form-row-mobile { flex-direction: column !important; gap: 0px !important; }
 }
