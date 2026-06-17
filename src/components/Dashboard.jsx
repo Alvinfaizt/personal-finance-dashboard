@@ -5,26 +5,25 @@ import TransactionForm from './TransactionForm'
 import FinancialChart from './FinancialChart'
 import TransactionList from './TransactionList'
 import BudgetTracker from './BudgetTracker'
+import CategoryChart from './CategoryChart' // Import komponen grafik baru
 
-function Dashboard({
-  currency,
-  setCurrency,
-  errorMessage,
-  transactions,
-  formatMoney,
-  addTransaction,
-  deleteTransaction
+function Dashboard({ 
+  currency, 
+  setCurrency, 
+  errorMessage, 
+  transactions, 
+  formatMoney, 
+  addTransaction, 
+  deleteTransaction 
 }) {
   const navigate = useNavigate()
-
-  // State untuk menyimpan batas anggaran bulanan
   const [budgetLimit, setBudgetLimit] = useState(0)
 
   return (
-    <div>
-      {/* Tombol Navigasi Kembali ke Beranda */}
-      <button
-        onClick={() => navigate('/')}
+    <div className="container">
+      {/* Tombol Back to Overview yang Sleek */}
+      <button 
+        onClick={() => navigate('/')} 
         style={{
           background: 'transparent',
           border: 'none',
@@ -61,20 +60,25 @@ function Dashboard({
       </div>
 
       {errorMessage && <div className="neo-alert-danger">{errorMessage}</div>}
+      
+      <BalanceBox transactions={transactions} formatMoney={formatMoney} /> 
 
-      <BalanceBox transactions={transactions} formatMoney={formatMoney} />
-
-      {/* Komponen Pelacak Anggaran Baru */}
-      <BudgetTracker
-        transactions={transactions}
-        budgetLimit={budgetLimit}
-        setBudgetLimit={setBudgetLimit}
+      <BudgetTracker 
+        transactions={transactions} 
+        budgetLimit={budgetLimit} 
+        setBudgetLimit={setBudgetLimit} 
         formatMoney={formatMoney}
         currency={currency}
       />
 
       <TransactionForm onAddTransaction={addTransaction} currency={currency} />
-      <FinancialChart transactions={transactions} currency={currency} />
+      
+      {/* Tata Letak Dua Kolom Grafik Berdampingan */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', marginBottom: '20px' }}>
+        <FinancialChart transactions={transactions} currency={currency} />
+        <CategoryChart transactions={transactions} /> {/* Memasang Grafik Donat Kategori */}
+      </div>
+
       <TransactionList transactions={transactions} onDeleteTransaction={deleteTransaction} formatMoney={formatMoney} />
     </div>
   )
