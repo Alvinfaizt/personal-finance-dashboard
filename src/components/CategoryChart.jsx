@@ -1,5 +1,6 @@
 import { Doughnut } from 'react-chartjs-2'
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chartjs-2'
+// PERBAIKAN: Mengubah 'chartjs-2' menjadi 'chart.js' pada baris di bawah ini
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 
 // Daftarkan komponen Chart.js yang dibutuhkan
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -18,7 +19,7 @@ function CategoryChart({ transactions }) {
   const labels = Object.keys(categoryTotals);
   const dataValues = Object.values(categoryTotals);
 
-  // 3. Konfigurasi Data Grafik dengan palet warna Clean Tech (Abu-abu, Hitam, dan aksen lembut)
+  // 3. Konfigurasi Data Grafik dengan palet warna Clean Tech
   const data = {
     labels: labels,
     datasets: [
@@ -33,7 +34,7 @@ function CategoryChart({ transactions }) {
           '#e2e8f0', // Border Soft
         ],
         borderWidth: 2,
-        borderColor: '#ffffff', // Garis potong antar donat warna putih bersih
+        borderColor: '#ffffff',
         hoverOffset: 4
       },
     ],
