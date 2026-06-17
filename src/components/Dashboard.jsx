@@ -6,41 +6,53 @@ import FinancialChart from './FinancialChart'
 import TransactionList from './TransactionList'
 import BudgetTracker from './BudgetTracker'
 
-function Dashboard({ 
-  currency, 
-  setCurrency, 
-  errorMessage, 
-  transactions, 
-  formatMoney, 
-  addTransaction, 
-  deleteTransaction 
+function Dashboard({
+  currency,
+  setCurrency,
+  errorMessage,
+  transactions,
+  formatMoney,
+  addTransaction,
+  deleteTransaction
 }) {
   const navigate = useNavigate()
-  
+
   // State untuk menyimpan batas anggaran bulanan
   const [budgetLimit, setBudgetLimit] = useState(0)
 
   return (
     <div>
       {/* Tombol Navigasi Kembali ke Beranda */}
-      <button 
-        onClick={() => navigate('/')} 
+      <button
+        onClick={() => navigate('/')}
         style={{
-          background: '#ffffff',
-          border: '1px solid #e2e8f0',
-          padding: '8px 14px',
-          borderRadius: '8px',
+          background: 'transparent',
+          border: 'none',
+          padding: '0 0 8px 0',
+          borderRadius: '0',
           fontWeight: 600,
           cursor: 'pointer',
-          marginBottom: '20px',
-          color: '#475569',
+          marginBottom: '30px',
+          color: '#64748b',
           fontFamily: "'Inter', sans-serif",
-          fontSize: '0.85rem',
-          boxShadow: '0 1px 2px rgba(0,0,0,0.02)',
-          display: 'block'
+          fontSize: '0.8rem',
+          letterSpacing: '0.05em',
+          textTransform: 'uppercase',
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '6px',
+          transition: 'color 0.2s ease, transform 0.2s ease',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.color = '#0f172a';
+          e.currentTarget.style.transform = 'translateX(-2px)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.color = '#64748b';
+          e.currentTarget.style.transform = 'translateX(0)';
         }}
       >
-        ⬅️ Kembali ke Beranda
+        <span style={{ fontSize: '1rem', lineHeight: '0' }}>←</span> Back to Overview
       </button>
 
       <div className="currency-bar">
@@ -49,14 +61,14 @@ function Dashboard({
       </div>
 
       {errorMessage && <div className="neo-alert-danger">{errorMessage}</div>}
-      
-      <BalanceBox transactions={transactions} formatMoney={formatMoney} /> 
+
+      <BalanceBox transactions={transactions} formatMoney={formatMoney} />
 
       {/* Komponen Pelacak Anggaran Baru */}
-      <BudgetTracker 
-        transactions={transactions} 
-        budgetLimit={budgetLimit} 
-        setBudgetLimit={setBudgetLimit} 
+      <BudgetTracker
+        transactions={transactions}
+        budgetLimit={budgetLimit}
+        setBudgetLimit={setBudgetLimit}
         formatMoney={formatMoney}
         currency={currency}
       />
