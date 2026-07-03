@@ -1,16 +1,40 @@
-# React + Vite
+# 📊 NeoFinance v2.0 — Personal Finance Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+NeoFinance is a sleek, dynamic, and minimalist personal finance tracking web application built using **React** and styled with a professional **Clean Tech Minimalist** aesthetic. This project was engineered to help users manage their personal economy with zero visual friction and highly readable real-time metrics.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Key Features
 
-## React Compiler
+*   **Clean Tech UI/UX**: Designed using the premium **Inter** typeface with a focus on high-contrast layout, subtle shadows, and a clean professional atmosphere inspired by premium SaaS platforms.
+*   **Multi-Currency Support**: Switch seamlessly between **USD ($)** and **IDR (Rp)** with localized monetary formatting across all components.
+*   **🎯 Monthly Budget Limiter**: Set dynamic expenditure constraints. Features an interactive progress bar that automatically shifts to an urgent alert state (red) when boundaries are breached.
+*   **📊 Double Analytics Metrics**:
+    *   **Financial Chart**: Monitors overall transaction trends and cashflow behavior.
+    *   **Expense by Category (Doughnut Chart)**: Visualizes categorical asset distribution (e.g., 💼 Salary, ☕ Food & Drink, 🎮 Gaming/Steam) using a sleek monochrome palette.
+*   **Mini Insight Widgets**: Features real-time log counts and live operational system indicators to ensure interface balance.
+*   **Persistent Storage**: Keeps data secure and preserved across browser sessions utilizing browser `localStorage`.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Built With
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+*   **React** (Functional Components & Hooks)
+*   **React Router v6** (Multi-page navigation architecture)
+*   **Chart.js & react-chartjs-2** (Dynamic analytical graphics rendering)
+*   **Inter Font** (Premium typography from Google Fonts API)
+*   **Vanilla CSS** (Structured custom global configuration)
+
+---
+
+## 🚀 Getting Started
+
+Follow these steps to run the development server locally on your machine.
+
+### Prerequisites
+Make sure you have **Node.js** (v16 or higher) and **npm** installed.
+
+### Installation
+1. Clone this repository to your local directory:
+   ```bash
+   git clone [https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME.git](https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME.git)
