@@ -1,35 +1,60 @@
+/* HIASAN DESIGN 2: Animasi Fade-In Halus saat halaman dimuat */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .container {
   padding: 50px 20px;
   max-width: 620px;
   margin: 0 auto;
   width: 100%;
   box-sizing: border-box;
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* Judul Utama dengan Font Baru yang Lebih Rapat dan Tegas */
+/* Judul Utama dengan Font Lebih Compact */
 .main-title {
   font-size: 2.2rem;
   font-weight: 800;
   text-align: center;
-  letter-spacing: -0.04em; /* Membuat font modern terlihat lebih compact/padat */
+  letter-spacing: -0.04em;
   margin-bottom: 35px;
   color: #0f172a;
 }
 
-/* Kotak Komponen Minimalis Premium */
+/* HIASAN DESIGN 3: Premium Glassmorphism Box dengan Border Glow Halus */
 .neo-box {
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.03);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+  /* Membuat background grid di belakangnya terlihat kabur estetik */
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(15, 23, 42, 0.05);
   padding: 28px;
   border-radius: 16px;
   margin-bottom: 20px;
-  box-shadow: 
-    0 1px 3px rgba(0,0,0,0.01),
-    0 10px 30px -5px rgba(0,0,0,0.02);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Efek interaktif saat kursor mendekati kotak card */
+.neo-box:hover {
+  transform: translateY(-2px);
+  border-color: rgba(15, 23, 42, 0.1);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.01),
+    0 12px 30px -4px rgba(15, 23, 42, 0.04);
 }
 
 .neo-box-danger {
-  background: #fef2f2;
+  background: rgba(254, 242, 242, 0.8);
+  backdrop-filter: blur(8px);
   border: 1px solid #fee2e2;
   padding: 28px;
   border-radius: 16px;
@@ -42,13 +67,15 @@
   justify-content: center;
   gap: 6px;
   margin-bottom: 30px;
-  background: #f1f5f9;
+  background: rgba(241, 245, 249, 0.8);
+  backdrop-filter: blur(4px);
   padding: 4px;
   border-radius: 10px;
   max-width: 200px;
   margin-left: auto;
   margin-right: auto;
 }
+
 .btn-currency {
   flex: 1;
   padding: 6px 12px;
@@ -60,25 +87,28 @@
   border-radius: 7px;
   cursor: pointer;
   color: #64748b;
-  transition: all 0.15s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 .btn-currency:hover {
   color: #0f172a;
 }
+
 .btn-currency.active {
   background: #ffffff;
   color: #0f172a;
   font-weight: 700;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
 }
 
-/* Input Form Minimalis Elegan */
-.neo-input, .neo-select {
+/* Input Form Minimalis Elegan dengan Transisi Glow */
+.neo-input,
+.neo-select {
   width: 100%;
   padding: 11px 14px;
   box-sizing: border-box;
   border: 1px solid #e2e8f0;
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.9);
   border-radius: 8px;
   font-family: 'Inter', sans-serif;
   font-weight: 500;
@@ -87,9 +117,13 @@
   margin-top: 6px;
   transition: all 0.2s ease;
 }
-.neo-input:focus, .neo-select:focus {
+
+.neo-input:focus,
+.neo-select:focus {
   outline: none;
   border-color: #0f172a;
+  box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.06);
+  /* Efek focus ring tipis modern */
 }
 
 /* Tombol Aksi Solid Hitam Tech */
@@ -105,10 +139,17 @@
   font-weight: 600;
   cursor: pointer;
   margin-top: 15px;
-  transition: background 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 .neo-btn:hover {
   background: #1e293b;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+}
+
+.neo-btn:active {
+  transform: translateY(0);
 }
 
 /* Baris Riwayat Transaksi yang Bersih */
@@ -116,9 +157,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 0;
+  padding: 14px 4px;
   border-bottom: 1px solid #f1f5f9;
   background: transparent;
+  transition: background-color 0.2s ease;
+}
+
+.neo-list-item:hover {
+  background-color: rgba(248, 250, 252, 0.6);
+  /* Efek sorot tipis saat baris disentuh */
 }
 
 /* Badge Kategori */
@@ -146,6 +193,7 @@
   border-radius: 50%;
   transition: all 0.2s ease;
 }
+
 .neo-btn-delete:hover {
   background: #fef2f2;
   color: #ef4444;
@@ -164,29 +212,19 @@
   cursor: pointer;
   transition: all 0.2s ease;
 }
+
 .btn-export:hover {
   background: #f8fafc;
   border-color: #cbd5e1;
 }
 
-/* Kotak Gagal Saldo */
-.neo-alert-danger {
-  background: #fef2f2;
-  border: 1px solid #fca5a5;
-  color: #991b1b;
-  border-radius: 8px;
-  padding: 12px;
-  font-weight: 600;
-  font-size: 0.85rem;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
 @media (max-width: 600px) {
-  .container { padding: 25px 16px; }
-  .neo-box, .neo-box-danger { padding: 20px; }
-}
+  .container {
+    padding: 25px 16px;
+  }
 
-@media (max-width: 450px) {
-  .form-row-mobile { flex-direction: column !important; gap: 0px !important; }
+  .neo-box,
+  .neo-box-danger {
+    padding: 20px;
+  }
 }
