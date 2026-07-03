@@ -1,8 +1,6 @@
-/* Mengambil font Inter (bobot 400, 500, 600, 700, 800) dari Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
-  /* Menerapkan Inter sebagai font utama */
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   color: #1e293b;
   -webkit-font-smoothing: antialiased;
@@ -13,7 +11,13 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background-color: #f8fafc; /* Putih pualam yang teduh */
+  color: #0f172a;
+
+  /* HIASAN DESIGN 1: Tech Grid Background Effect (Pola titik-titik halus) */
+  background-color: #f8fafc;
+  background-image: radial-gradient(#e2e8f0 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+
   display: flex;
   justify-content: center;
 }
@@ -22,9 +26,11 @@ body {
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
-  background: #f8fafc;
+  background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #cbd5e1;
   border-radius: 10px;
