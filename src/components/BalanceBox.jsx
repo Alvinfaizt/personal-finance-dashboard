@@ -1,29 +1,31 @@
 function BalanceBox({ transactions, formatMoney }) {
-  const income = transactions.filter(item => item.type === 'income').reduce((sum, item) => sum + item.amount, 0);
-  const expense = transactions.filter(item => item.type === 'expense').reduce((sum, item) => sum + item.amount, 0);
-  const balance = income - expense;
-  const isDeficit = balance <= 0;
+  const income = transactions
+    .filter((item) => item.type === 'income')
+    .reduce((acc, item) => acc + item.amount, 0)
+
+  const expense = transactions
+    .filter((item) => item.type === 'expense')
+    .reduce((acc, item) => acc + item.amount, 0)
+
+  const totalBalance = income - expense
 
   return (
-    <div className={isDeficit ? "neo-box-danger" : "neo-box"} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-      <div>
-        <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#94a3b8', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
-          {isDeficit ? "⚠️ System Deficit" : "Current Balance"}
-        </span>
-        <h1 style={{ margin: '4px 0 0 0', fontSize: '2.6rem', fontWeight: 800, color: '#0f172a' }}>
-          {formatMoney(balance)}
-        </h1>
-      </div>
-
-      <div style={{ display: 'flex', justifyContent: 'space-between', gap: '15px' }}>
-        <div style={{ flex: 1, backgroundColor: '#f0fdf4', padding: '12px', borderRadius: '8px', border: '1px solid #bbf7d0' }}>
-          <span style={{ fontSize: '0.7rem', fontWeight: 700, color: '#16a34a' }}>INCOME</span>
-          <h3 style={{ margin: '2px 0 0 0', fontWeight: 700, color: '#15803d' }}>+{formatMoney(income)}</h3>
+    <div className="neo-box" style={{ textAlign: 'center', marginBottom: '24px' }}>
+      <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+        Current Balance
+      </span>
+      <h1 style={{ fontSize: '2.8rem', fontWeight: 800, margin: '12px 0', color: 'var(--text-main)', letterSpacing: '-0.04em' }}>
+        {formatMoney(totalBalance)}
+      </h1>
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '40px', marginTop: '20px', borderTop: '1px solid var(--border-color)', paddingTop: '16px' }}>
+        <div>
+          <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#16a34a', display: 'block', textTransform: 'uppercase' }}>Income</span>
+          <span style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-main)' }}>{formatMoney(income)}</span>
         </div>
-        
-        <div style={{ flex: 1, backgroundColor: '#fef2f2', padding: '12px', borderRadius: '8px', border: '1px solid #fecaca' }}>
-          <span style={{ fontSize: '0.7rem', fontWeight: 700, color: '#dc2626' }}>EXPENSE</span>
-          <h3 style={{ margin: '2px 0 0 0', fontWeight: 700, color: '#b91c1c' }}>-{formatMoney(expense)}</h3>
+        <div style={{ borderLeft: '1px solid var(--border-color)' }}></div>
+        <div>
+          <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#dc2626', display: 'block', textTransform: 'uppercase' }}>Expense</span>
+          <span style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-main)' }}>{formatMoney(expense)}</span>
         </div>
       </div>
     </div>
