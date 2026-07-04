@@ -1,93 +1,36 @@
-import { useState } from 'react'
-
 function BudgetTracker({ transactions, budgetLimit, setBudgetLimit, formatMoney, currency }) {
-  const [inputVal, setInputVal] = useState('')
+  const currentExpense = transactions
+    .filter((item) => item.type === 'expense')
+    .reduce((acc, item) => acc + item.amount, 0)
 
-  // Hitung total pengeluaran dari transaksi yang bertipe 'expense'
-  const totalExpense = transactions
-    .filter(item => item.type === 'expense')
-    .reduce((sum, item) => sum + item.amount, 0);
-
-  // Jalankan pengaturan budget saat tombol di-klik
-  const handleSetBudget = (e) => {
-    e.preventDefault();
-    const num = parseFloat(inputVal);
-    if (!isNaN(num) && num >= 0) {
-      setBudgetLimit(num);
-    }
-  };
-
-  // Hitung persentase pemakaian budget
-  const percentage = budgetLimit > 0 ? Math.min((totalExpense / budgetLimit) * 100, 100) : 0;
-  const isOverBudget = totalExpense > budgetLimit;
+  const isOverBudget = budgetLimit > 0 && currentExpense > budgetLimit
+  const progressPercentage = budgetLimit > 0 ? Math.min((currentExpense / budgetLimit) * 100, 100) : 0
 
   return (
-    <div className="neo-box">
-      <h3 style={{ margin: '0 0 15px 0', fontSize: '1.1rem', fontWeight: 700, color: '#0f172a' }}>
-        🎯 Monthly Budget Limiter
+    <div className={isOverBudget ? "neo-box-danger" : "neo-box"}>
+      <h3 style={{ margin: '0 0 16px 0', fontSize: '1rem', fontWeight: 700, color: isOverBudget ? '#991b1b' : 'var(--text-main)' }}>
+        🎯 Target Budget Constraint
       </h3>
-
-      {/* Form Input Anggaran */}
-      <form onSubmit={handleSetBudget} style={{ display: 'flex', gap: '10px', marginBottom: '20px', alignItems: 'flex-end' }}>
-        <div style={{ flex: 1 }}>
-          <label style={{ fontSize: '0.75rem', fontWeight: 600, color: '#64748b' }}>
-            Set Expense Limit ({currency})
-          </label>
-          <input 
-            type="number" 
-            className="neo-input" 
-            placeholder="e.g. 500" 
-            value={inputVal}
-            onChange={(e) => setInputVal(e.target.value)}
-            style={{ marginTop: '4px' }}
-          />
-        </div>
-        <button 
-          type="submit" 
-          className="neo-btn" 
-          style={{ width: 'auto', padding: '11px 20px', marginTop: 0 }}
-        >
-          Apply
-        </button>
-      </form>
-
-      {/* Tampilan Progress Bar jika Budget Limit sudah diatur (> 0) */}
-      {budgetLimit > 0 ? (
+      <div style={{ display: 'flex', gap: '12px', marginBottom: '16px' }}>
+        <input 
+          type="number" 
+          className="neo-input" 
+          style={{ marginTop: 0 }}
+          placeholder="Set boundary limit..." 
+          value={budgetLimit || ''} 
+          onChange={(e) => setBudgetLimit(parseFloat(e.target.value) || 0)} 
+        />
+      </div>
+      {budgetLimit > 0 && (
         <div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', fontWeight: 500, marginBottom: '6px' }}>
-            <span style={{ color: '#64748b' }}>
-              Used: <strong style={{ color: '#0f172a' }}>{formatMoney(totalExpense)}</strong> of {formatMoney(budgetLimit)}
-            </span>
-            <span style={{ fontWeight: 700, color: isOverBudget ? '#dc2626' : '#0f172a' }}>
-              {percentage.toFixed(0)}%
-            </span>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', fontWeight: 600, marginBottom: '6px', color: isOverBudget ? '#991b1b' : 'var(--text-muted)' }}>
+            <span>Used: {formatMoney(currentExpense)}</span>
+            <span>Limit: {formatMoney(budgetLimit)}</span>
           </div>
-
-          {/* Track Bar luar */}
-          <div style={{ width: '100%', height: '8px', backgroundColor: '#f1f5f9', borderRadius: '999px', overflow: 'hidden' }}>
-            {/* Indikator Bar dalam */}
-            <div 
-              style={{ 
-                width: `${percentage}%`, 
-                height: '100%', 
-                backgroundColor: isOverBudget ? '#ef4444' : '#0f172a', 
-                borderRadius: '999px',
-                transition: 'width 0.4s ease-out, background-color 0.3s ease'
-              }}
-            />
+          <div style={{ width: '100%', height: '8px', backgroundColor: isOverBudget ? 'rgba(239, 68, 68, 0.2)' : 'var(--border-color)', borderRadius: '99px', overflow: 'hidden' }}>
+            <div style={{ width: `${progressPercentage}%`, height: '100%', backgroundColor: isOverBudget ? '#ef4444' : 'var(--text-main)', transition: 'width 0.4s ease' }} />
           </div>
-
-          {/* Notifikasi Peringatan jika Over Budget */}
-          {isOverBudget && (
-            <p style={{ margin: '10px 0 0 0', fontSize: '0.8rem', color: '#dc2626', fontWeight: 600 }}>
-              ⚠️ Warning: You have exceeded your monthly budget limit!
-            </p>
-          )}
         </div>
-      ) : (
-        <p style={{ margin: 0, fontSize: '0.85rem', color: '#94a3b8', fontStyle: 'italic' }}>
-          No budget limit set for this month yet.
-        </p>
       )}
     </div>
   )
