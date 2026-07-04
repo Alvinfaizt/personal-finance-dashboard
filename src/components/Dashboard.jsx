@@ -6,6 +6,7 @@ import FinancialChart from './FinancialChart'
 import TransactionList from './TransactionList'
 import BudgetTracker from './BudgetTracker'
 import CategoryChart from './CategoryChart'
+import ThemeSwitcher from './ThemeSwitcher'
 
 function Dashboard({ 
   currency, 
