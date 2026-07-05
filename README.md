@@ -40,3 +40,5 @@ Make sure you have **Node.js** (v16 or higher) and **npm** installed.
    git clone [https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME.git](https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME.git)
 
 * **Dynamic Transaction Filter**: Toggle between viewing All, Income, or Expense logs instantly.
+
+│   ├── SavingsRate.jsx       # Financial velocity efficiency metric
