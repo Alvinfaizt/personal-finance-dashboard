@@ -8,7 +8,7 @@ function ThemeSwitcher() {
   }, [theme])
 
   return (
-    <div className="neo-box" style={{ padding: '16px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <div className="neo-box" style={{ padding: '16px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
       <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
         🎨 Workspace Core Skin
       </span>
@@ -37,5 +37,4 @@ function ThemeSwitcher() {
     </div>
   )
 }
-
 export default ThemeSwitcher
