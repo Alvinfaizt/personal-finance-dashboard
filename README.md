@@ -17,7 +17,7 @@ NeoFinance is a personal finance dashboard engineered with a **Clean Tech Minima
 
 * **Frontend Framework**: React (Functional Components & Hooks)
 * **Navigation Router**: React Router v6 Architecture
-* **Data Visualization**: Chart.js & `react-chartjs-2`
+* **Data Visualization**: Chart.js & react-chartjs-2
 * **Typography Asset**: Inter Google Fonts API
 
 ---
@@ -25,5 +25,33 @@ NeoFinance is a personal finance dashboard engineered with a **Clean Tech Minima
 ## 🚀 Local Deployment Setup
 
 ### 1. Initialize Folder
-```bash
 cd your-project-folder
+
+### 2. Inject Dependencies
+npm install
+
+### 3. Launch Development Server
+npm run dev
+
+---
+
+## 📁 Repository Blueprint
+
+src/
+├── components/
+│   ├── BalanceBox.jsx         # Summary metrics monitor
+│   ├── BudgetTracker.jsx      # Constraint management bar
+│   ├── CategoryChart.jsx      # Categorical doughnut visualization
+│   ├── FinancialChart.jsx     # Baseline trend visualizer
+│   ├── SavingsRate.jsx        # Income efficiency velocity calculator
+│   ├── ThemeSwitcher.jsx      # Core skin controller engine
+│   ├── TransactionFilter.jsx  # History type state modifier
+│   ├── TransactionForm.jsx    # Structural data entry interface
+│   └── TransactionList.jsx    # Log rendering array with filters
+├── App.jsx                    # Core shell module routing
+├── App.css                    # Structural Glassmorphism CSS variables
+├── index.css                  # Typography configuration framework
+└── main.jsx                   # Execution DOM entry point
+
+---
+*NeoFinance Design Ecosystem © 2026. Engineered by Alvin.*
