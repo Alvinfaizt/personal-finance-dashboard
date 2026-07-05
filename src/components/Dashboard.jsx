@@ -7,6 +7,7 @@ import TransactionList from './TransactionList'
 import BudgetTracker from './BudgetTracker'
 import CategoryChart from './CategoryChart'
 import ThemeSwitcher from './ThemeSwitcher'
+import SavingsRate from './SavingsRate'
 
 function Dashboard({ 
   currency, 
