@@ -103,7 +103,7 @@ function Dashboard({
         <CategoryChart transactions={transactions} />
       </div>
 
-      <TransactionList transactions={transactions} onDeleteTransaction={deleteTransaction} formatMoney={formatMoney} />
+      <TransactionList transactions={transactions} onDeleteTransaction={deleteTransaction} formatMoney={formatMoney} setTransactions={setTransactions} />
     </div>
   )
 }
