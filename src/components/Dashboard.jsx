@@ -1,110 +1,102 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import BalanceBox from './BalanceBox'
-import TransactionForm from './TransactionForm'
-import FinancialChart from './FinancialChart'
-import TransactionList from './TransactionList'
-import BudgetTracker from './BudgetTracker'
-import CategoryChart from './CategoryChart'
-import ThemeSwitcher from './ThemeSwitcher'
-import SavingsRate from './SavingsRate'
+import { useState, useEffect } from 'react';
 
-function Dashboard({ 
-  currency, 
-  setCurrency, 
-  errorMessage, 
-  transactions, 
-  formatMoney, 
-  addTransaction, 
-  deleteTransaction 
-}) {
-  const navigate = useNavigate()
-  const [budgetLimit, setBudgetLimit] = useState(0)
-  const totalTransactionsCount = transactions.length
+// 1. IMPORT SEMUA KOMPONEN BARU
+import WelcomeBanner from './WelcomeBanner';
+import CryptoTicker from './CryptoTicker';
+import MetricCards from './MetricCards';
+import SearchBar from './SearchBar';
+import QuickAdd from './QuickAdd';
+import FinancialTip from './FinancialTip';
+import ActivityLog from './ActivityLog';
+import ExportPanel from './ExportPanel';
+import SystemReset from './SystemReset';
+
+// Import komponen bawaan lama kamu (sesuaikan path-nya jika berbeda)
+import TransactionForm from './TransactionForm';
+import TransactionList from './TransactionList';
+
+function Dashboard() {
+  // State bawaan untuk menampung data transaksi
+  const [transactions, setTransactions] = useState(() => {
+    const saved = localStorage.getItem('transactions');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  // State baru untuk mendukung Fitur 8 (Search Bar)
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Sinkronisasi data ke localStorage setiap ada perubahan
+  useEffect(() => {
+    localStorage.setItem('transactions', JSON.stringify(transactions));
+  }, [transactions]);
+
+  // Fungsi helper global untuk format mata uang
+  const formatMoney = (amount) => {
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
+  };
+
+  // Fungsi aksi untuk menambah transaksi (dipakai form lama & QuickAdd)
+  const handleAddTransaction = (newTransaction) => {
+    setTransactions([newTransaction, ...transactions]);
+  };
+
+  // Fungsi aksi untuk menghapus transaksi
+  const handleDeleteTransaction = (id) => {
+    setTransactions(transactions.filter(t => t.id !== id));
+  };
+
+  // Logika filter deskripsi berdasarkan query dari SearchBar
+  const filteredTransactions = transactions.filter(t =>
+    t.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
-    <div className="container">
+    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px', fontFamily: "'Inter', sans-serif" }}>
       
-      {/* HEADER UTILITAS */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
-        <button 
-          onClick={() => navigate('/')} 
-          style={{
-            background: 'transparent',
-            border: 'none',
-            padding: '0',
-            fontWeight: 600,
-            cursor: 'pointer',
-            color: 'var(--text-muted)',
-            fontFamily: "'Inter', sans-serif",
-            fontSize: '0.8rem',
-            letterSpacing: '0.05em',
-            textTransform: 'uppercase',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '6px',
-            transition: 'color 0.2s ease, transform 0.2s ease',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.color = 'var(--text-main)';
-            e.currentTarget.style.transform = 'translateX(-2px)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.color = 'var(--text-muted)';
-            e.currentTarget.style.transform = 'translateX(0)';
-          }}
-        >
-          <span style={{ fontSize: '1rem', lineHeight: '0' }}>←</span> Back to Overview
-        </button>
+      {/* baris ATAS: Banner Utama */}
+      <WelcomeBanner />
 
-        {/* STATUS OPERASIONAL */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', backgroundColor: 'var(--border-color)', padding: '6px 12px', borderRadius: '20px' }}>
-          <span style={{ width: '6px', height: '6px', backgroundColor: '#22c55e', borderRadius: '50%', display: 'inline-block' }} />
-          <span style={{ fontSize: '0.7rem', fontWeight: 600, color: 'var(--text-muted)', letterSpacing: '0.03em', textTransform: 'uppercase' }}>
-            Storage Active
-          </span>
+      {/* TATA LETAK GRID: Membagi Workspace Menjadi 2 Kolom (Khas Dashboard) */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(300px, 1fr) 2fr', gap: '24px' }}>
+        
+        {/* KOLOM KIRI: Kontrol Panel & Input */}
+        <div className="left-panel" style={{ display: 'flex', flexDirection: 'col', gap: '24px' }}>
+          <CryptoTicker />
+          
+          <div className="neo-box" style={{ padding: '20px' }}>
+            <h3 style={{ margin: '0 0 16px 0', fontSize: '1rem', fontWeight: 700 }}>➕ New Record Entry</h3>
+            <TransactionForm onAddTransaction={handleAddTransaction} />
+          </div>
+
+          <QuickAdd onAddTransaction={handleAddTransaction} />
+          <FinancialTip />
+          <SystemReset setTransactions={setTransactions} />
         </div>
-      </div>
 
-      {/* FIXED BAR MATA UANG */}
-      <div className="currency-bar">
-        <button className={`btn-currency ${currency === 'USD' ? 'active' : ''}`} onClick={() => setCurrency('USD')}>USD</button>
-        <button className={`btn-currency ${currency === 'IDR' ? 'active' : ''}`} onClick={() => setCurrency('IDR')}>IDR</button>
-      </div>
+        {/* KOLOM KANAN: Visualisasi, Metrik, & Database Logs */}
+        <div className="right-panel">
+          <MetricCards transactions={transactions} formatMoney={formatMoney} />
+          
+          <div className="neo-box" style={{ padding: '20px', marginBottom: '24px' }}>
+            <h3 style={{ margin: '0 0 16px 0', fontSize: '1rem', fontWeight: 700 }}>🔍 Filter Engine</h3>
+            <SearchBar search={searchQuery} setSearch={setSearchQuery} />
+          </div>
 
-      {/* SAKLAR INTERFASIAL TEMA */}
-      <ThemeSwitcher />
-
-      {errorMessage && <div className="neo-alert-danger">{errorMessage}</div>}
-      
-      <BalanceBox transactions={transactions} formatMoney={formatMoney} /> 
-
-      {/* DUA KOLOM METRIK WIDGET HIASAN */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '24px' }}>
-        <div className="neo-box" style={{ margin: 0, padding: '16px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase' }}>Total Logs</span>
-          <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-main)' }}>{totalTransactionsCount} items</span>
+          <ExportPanel transactions={transactions} />
+          
+          {/* Mengirimkan data yang sudah terfilter oleh SearchBar ke list utama */}
+          <TransactionList 
+            transactions={filteredTransactions} 
+            onDeleteTransaction={handleDeleteTransaction}
+            formatMoney={formatMoney}
+          />
+          
+          <ActivityLog transactions={transactions} />
         </div>
-        <SavingsRate transactions={transactions} />
+
       </div>
-
-      <BudgetTracker 
-        transactions={transactions} 
-        budgetLimit={budgetLimit} 
-        setBudgetLimit={setBudgetLimit} 
-        formatMoney={formatMoney}
-        currency={currency}
-      />
-
-      <TransactionForm onAddTransaction={addTransaction} currency={currency} />
-      
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', marginBottom: '24px' }}>
-        <FinancialChart transactions={transactions} currency={currency} />
-        <CategoryChart transactions={transactions} />
-      </div>
-
-      <TransactionList transactions={transactions} onDeleteTransaction={deleteTransaction} formatMoney={formatMoney} setTransactions={setTransactions} />
     </div>
-  )
+  );
 }
-export default Dashboard
+
+export default Dashboard;
